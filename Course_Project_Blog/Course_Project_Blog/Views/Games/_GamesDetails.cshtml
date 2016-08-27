@@ -1,0 +1,17 @@
+﻿@model Course_Project_Blog.Models.GameDetailsViewModel
+    
+@if (Model.Result != null)
+{
+    <div class="description">Result: @Model.2Result</div>
+}
+
+@if (Model.Author != null)
+{
+    <div class="description">Authot: @Model.Author</div>
+}
+@if (ViewBag.CanEdit)
+{
+    @Html.ActionLink("Edit", "Edit", "Games", new { id = Model.Id }, new { @class = "btn btn-default" })
+    <span></span>
+    //@Html.ActionLink("Delete", "Delete", "Games", new { id = Model.Id }, new { @class = "btn btn-default" })
+}

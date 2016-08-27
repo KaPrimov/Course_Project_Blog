@@ -1,0 +1,39 @@
+﻿@model Course_Project_Blog.Models.UpcomingPassedGamesViewModel
+    
+@{
+    ViewBag.Title = "Games";
+}
+
+<h1 class="games-grouop-heading">Fixtures:</h1>
+
+<div class="row">
+@if (Model.PassedEvents.Any())
+{
+    <h2 calss="col-md-4 col-sm-6 col-xs-12">Passed games:</h2>
+        @Html.DisplayFor(x => x.PassedEvents)
+}
+else
+{
+    <div calss="col-md-4 col-sm-6 col-xs-12">No passed games</div>
+}
+
+</div>
+
+<div class="row">
+    @if (Model.UpcomingGames.Any())
+    {
+        <h2 calss="col-md-4 col-sm-6 col-xs-12">Upcoming games:</h2>
+        @Html.DisplayFor(x => x.UpcomingGames)
+        }
+    else
+    {
+        <div calss="col-md-4 col-sm-6 col-xs-12">No upcoming games</div>
+    }
+
+</div><br/>
+
+<h2>@Html.ActionLink("[Create Event]", "Create", "Games")</h2>
+
+@section scripts {
+    @Scripts.Render("~/bundles/ajax")
+}

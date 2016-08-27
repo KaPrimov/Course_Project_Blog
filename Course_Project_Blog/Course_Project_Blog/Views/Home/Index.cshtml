@@ -1,0 +1,44 @@
+﻿@using Course_Project_Blog.Classes
+@{
+    ViewBag.Title = "Home";
+}
+
+@model List<Course_Project_Blog.Models.Post>
+
+
+<aside class="sidebar">
+    <div>
+        <h5 class="widget-title">Last 5 Posts</h5>
+
+        @foreach (var p in ViewBag.sidePosts)
+        {
+            <div class="post">
+                <h6 class="title"><a href="/Posts/Details/@p.Id">@p.Title</a></h6>
+            </div>
+        }
+    </div>
+</aside>
+
+
+
+@foreach (var post in Model)
+{
+    <section class="row">
+        <div class="post col-md-8">
+            <h2 class="title">
+                <a href="/Posts/Details/@post.Id">@post.Title</a>
+            </h2>
+            <div class="title">
+                Posted on <i>@post.Date</i>
+                @if (post.Author != null)
+                {
+                    @:by <i>
+                        @post.Author.FullName
+                    @:(@post.Author.UserName)</i>
+                }
+            </div>
+            <div class="body">@Utils.CutText(post.Body)</div>
+        </div>
+    </section>
+
+}
