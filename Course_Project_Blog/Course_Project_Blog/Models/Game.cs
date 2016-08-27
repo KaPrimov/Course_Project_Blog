@@ -19,7 +19,7 @@ namespace Course_Project_Blog.Models
         [DataType(DataType.DateTime)]
         public DateTime StarTime { get; set; }
 
-        public virtual ApplicationUser Author { get; set; }
+        public ApplicationUser Author { get; set; }
 
         public string AuthorId { get; set; }
 

@@ -22,7 +22,8 @@
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Site.css"));
+                      "~/Content/Site.css",
+                      "~/Content/justified-nav.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/ajax").Include(
                 "~/Scripts/jquery.unobtrusive-ajax.min.js"));

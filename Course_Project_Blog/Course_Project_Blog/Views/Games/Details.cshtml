@@ -1,0 +1,46 @@
+﻿@model Course_Project_Blog.Models.Game
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Game</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Teams)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teams)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StarTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StarTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Adinistartors"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })@:|
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,39 +1,59 @@
-﻿@model Course_Project_Blog.Models.UpcomingPassedGamesViewModel
-    
+﻿@model IEnumerable<Course_Project_Blog.Models.Game>
+
 @{
-    ViewBag.Title = "Games";
+    ViewBag.Title = "Index";
 }
 
-<h1 class="games-grouop-heading">Fixtures:</h1>
+<h2>Index</h2>
 
-<div class="row">
-@if (Model.PassedEvents.Any())
-{
-    <h2 calss="col-md-4 col-sm-6 col-xs-12">Passed games:</h2>
-        @Html.DisplayFor(x => x.PassedEvents)
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <b>Author Name</b>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Teams)
+        </th>
+        <th>
+            <b>Start Time</b>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teams)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StarTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Result)
+        </td>
+        <td>
+            @if (User.IsInRole("Administrators"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })@:|
+            }
+
+            @Html.ActionLink("Details", "Details", new {id = item.Id})|
+
+            @if (User.IsInRole("Administrators"))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            }
+        </td>
+    </tr>
 }
-else
-{
-    <div calss="col-md-4 col-sm-6 col-xs-12">No passed games</div>
-}
 
-</div>
-
-<div class="row">
-    @if (Model.UpcomingGames.Any())
-    {
-        <h2 calss="col-md-4 col-sm-6 col-xs-12">Upcoming games:</h2>
-        @Html.DisplayFor(x => x.UpcomingGames)
-        }
-    else
-    {
-        <div calss="col-md-4 col-sm-6 col-xs-12">No upcoming games</div>
-    }
-
-</div><br/>
-
-<h2>@Html.ActionLink("[Create Event]", "Create", "Games")</h2>
-
-@section scripts {
-    @Scripts.Render("~/bundles/ajax")
-}
+</table>

@@ -58,3 +58,15 @@ aside {
     margin: 5px 0 5px 0;
     word-wrap: break-word;
 }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+.navbar {
+    
+}

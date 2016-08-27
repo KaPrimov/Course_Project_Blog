@@ -217,25 +217,19 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentInputModel.cs" />
     <Compile Include="Models\CommentsViewModel.cs" />
-    <Compile Include="Models\GameDetailsViewModel.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GamesInputModel.cs" />
-    <Compile Include="Models\GamesViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
-    <Compile Include="Models\UpcomingPassedGamesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -253,8 +247,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -321,12 +313,12 @@
     <Content Include="Views\Home\Schedule.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
-    <Content Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\GamesViewModel.cshtml" />
     <Content Include="Views\Games\Create.cshtml" />
-    <Content Include="Views\Games\_GamesEditorForm.cshtml" />
+    <Content Include="Views\Games\Delete.cshtml" />
+    <Content Include="Views\Games\Details.cshtml" />
     <Content Include="Views\Games\Edit.cshtml" />
-    <Content Include="Views\Games\_GamesDetails.cshtml" />
+    <Content Include="Views\Games\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,125 +1,141 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Course_Project_Blog.Extensions;
 using Course_Project_Blog.Models;
-using Microsoft.AspNet.Identity;
 
 namespace Course_Project_Blog.Controllers
 {
-    public class GamesController : BaseController
+    public class GamesController : Controller
     {
-        
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        // GET: Games
         public ActionResult Index()
         {
-            var games = db.Games.OrderBy(g => g.StarTime).Select(g => new GamesViewModel()
-            {
-                Id = g.Id,
-                Teams = g.Teams,
-                StarTime = g.StarTime,
-               
-            });
-            var upcomingGames = games.Where(g => g.StarTime > DateTime.Now);
-            var passedGames = games.Where(g => g.StarTime <= DateTime.Now);
-            return View(new UpcomingPassedGamesViewModel()
-            {
-                UpcomingGames = upcomingGames,
-                PassedEvents = passedGames
-            });
-
-            
+            var games = db.Games.Include(g => g.Author);
+            return View(games.OrderBy(g => g.StarTime).ToList());
         }
 
-        //GET: Games/Create
+        // GET: Games/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Game game = db.Games.Find(id);
+            if (game == null)
+            {
+                return HttpNotFound();
+            }
+            return View(game);
+        }
+
+        // GET: Games/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
+        // POST: Games/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult Create(GamesInputModel model)
+        public ActionResult Create([Bind(Include = "Id,Teams,StarTime,AuthorId,Result")] Game game)
         {
-            if (model != null && ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var g = new Game()
-                {
-                    AuthorId = User.Identity.GetUserId(),
-                    Teams = model.Teams,
-                    StarTime = model.StarTime,
-                    Result = model.Result
-                };
-                db.Games.Add(g);
+                db.Games.Add(game);
                 db.SaveChanges();
-                this.AddNotification("Game added", NotificationType.INFO);
+                game.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                this.AddNotification("Game created.", NotificationType.INFO);
                 return RedirectToAction("Index");
             }
-            return View(model);
-        }
 
-        [HttpGet]
-        public ActionResult Edit(int id)
-        {
-            var gameToEdit = LoadGame(id);
-            if (gameToEdit == null)
-            {
-                this.AddNotification("Cannoit edit event #" + id, NotificationType.ERROR);
-                return RedirectToAction("Index");
-
-            }
-            var model = GamesInputModel.CreateFromGame(gameToEdit);
-            return View(model);
-        }
-
-        private Game LoadGame(int id)
-        {
-            var currentUserId = User.Identity.GetUserId();
-            var gameToEdit = db.Games.Where(g => g.Id == id).FirstOrDefault(g => g.AuthorId == currentUserId || isAdmin());
-            return gameToEdit;
             
+            return View(game);
         }
 
+        // GET: Games/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                this.AddNotification("No Game can be found.", NotificationType.ERROR);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Game game = db.Games.Find(id);
+            if (game == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(game);
+        }
+
+        // POST: Games/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-
-        public ActionResult Edit(int id, GamesInputModel model)
+        [Authorize(Roles = "Administrators")]
+        public ActionResult Edit([Bind(Include = "Id,Teams,StarTime,AuthorId,Result")] Game game)
         {
-            var gameToEdit = LoadGame(id);
-            if (gameToEdit == null)
+            if (ModelState.IsValid)
             {
-                this.AddNotification("Cannoit edit event #" + id, NotificationType.ERROR);
-                return RedirectToAction("Index");
-            }
-
-            if (ModelState != null && ModelState.IsValid)
-            {
-                gameToEdit.Teams = model.Teams;
-                gameToEdit.StarTime = model.StarTime;
-                gameToEdit.Result = model.Result;
-
+                db.Entry(game).State = EntityState.Modified;
                 db.SaveChanges();
-                this.AddNotification("Event edited", NotificationType.INFO);
+                this.AddNotification("Game edited.", NotificationType.INFO);
                 return RedirectToAction("Index");
+                
             }
-            return View(model);
+            return View(game);
         }
 
-        public ActionResult GamesDetailsById(int id)
+        // GET: Games/Delete/5
+        public ActionResult Delete(int? id)
         {
-            var currentUserId = User.Identity.GetUserId();
-            var isAdmin = this.isAdmin();
-            var gameDetails = db.Games.Where(g => g.Id == id)
-                .Where(g => isAdmin || (g.AuthorId != null && g.AuthorId == currentUserId))
-                .Select(GameDetailsViewModel.ViewModel)
-                .FirstOrDefault();
-            var isOwner = (gameDetails != null && gameDetails.Author != null && gameDetails.Author == currentUserId);
-            this.ViewBag.CanEdit = isOwner || isAdmin;
-            return this.PartialView("_GamesDetails", gameDetails);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Game game = db.Games.Find(id);
+            if (game == null)
+            {
+                return HttpNotFound();
+            }
+            return View(game);
+        }
+
+        // POST: Games/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrators")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Game game = db.Games.Find(id);
+            db.Games.Remove(game);
+            db.SaveChanges();
+            this.AddNotification("Game deleated.", NotificationType.INFO);
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

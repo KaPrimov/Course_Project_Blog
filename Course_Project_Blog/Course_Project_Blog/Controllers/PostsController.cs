@@ -24,7 +24,7 @@ namespace Course_Project_Blog.Controllers
         {
             if (id == null)
             {
-                this.AddNotification("You do not have the rights to do that", NotificationType.ERROR);
+                this.AddNotification("The Post can not be found", NotificationType.ERROR);
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Post post = db.Posts.Find(id);

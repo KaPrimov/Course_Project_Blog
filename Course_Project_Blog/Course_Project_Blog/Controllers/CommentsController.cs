@@ -25,6 +25,7 @@ namespace Course_Project_Blog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(CommentInputModel model)
         {
 
@@ -37,14 +38,17 @@ namespace Course_Project_Blog.Controllers
                     Date = model.Date
 
                 };
-
-
                 db.Comments.Add(e);
                 db.SaveChanges();
                 this.AddNotification("Comment created", NotificationType.INFO);
                 return RedirectToAction("Create");
             }
-            return View(model);
+            else
+            {
+                this.AddNotification("You hat to login", NotificationType.ERROR);
+                return View(model);
+            }
+            
         }
 
     }
