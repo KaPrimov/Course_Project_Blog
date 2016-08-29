@@ -18,7 +18,7 @@ namespace Course_Project_Blog.Models
         }
         
         [Key]
-        public int Id { get; set; }
+        public int PostId { get; set; }
 
         [Required]
         [StringLength(200)]

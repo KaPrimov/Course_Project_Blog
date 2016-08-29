@@ -218,10 +218,8 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\CommentInputModel.cs" />
-    <Compile Include="Models\CommentsViewModel.cs" />
+    <Compile Include="Models\CommentsAndPostsViewModel.cs" />
     <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\GamesInputModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -313,12 +311,14 @@
     <Content Include="Views\Home\Schedule.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\GamesViewModel.cshtml" />
     <Content Include="Views\Games\Create.cshtml" />
     <Content Include="Views\Games\Delete.cshtml" />
     <Content Include="Views\Games\Details.cshtml" />
     <Content Include="Views\Games\Edit.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

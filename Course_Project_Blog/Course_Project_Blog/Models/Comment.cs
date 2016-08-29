@@ -31,8 +31,6 @@ namespace Course_Project_Blog.Models
         public virtual ApplicationUser Author { get; set; }
         
         public int PostId { get; set; }
-
-        [Required]
-        public virtual Post Post { get; set; }
+       
     }
 }

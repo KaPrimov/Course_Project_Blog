@@ -49,7 +49,7 @@ namespace Course_Project_Blog.Controllers
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Id,Title,Body")] Post post)
+        public ActionResult Create([Bind(Include = "PostId,Title,Body")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace Course_Project_Blog.Controllers
         [ValidateInput(false)]
         [Authorize(Roles = "Administrators")]
         
-        public ActionResult Edit([Bind(Include = "Id,Title,Body,Date,Author_Id")] Post post)
+        public ActionResult Edit([Bind(Include = "PostId,Title,Body,Date,Author_Id")] Post post)
         {
             if (ModelState.IsValid)
             {

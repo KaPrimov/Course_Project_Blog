@@ -20,7 +20,6 @@ namespace Course_Project_Blog.Models
 
         public IDbSet<Post> Posts { get; set; }
         public IDbSet<Comment> Comments { get; set; }
-
         public IDbSet<Game> Games { get; set; }
 
         

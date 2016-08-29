@@ -28,41 +28,44 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @if (item.Author == null)
-            {
-                <i>No Author</i>
-            }
-            @Html.DisplayFor(modelItem => item.Author.FullName)
-            (@Html.DisplayFor(modelItem => item.Author.UserName))
-        </td>
-        <td>
-            @if (User.IsInRole("Administrators"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })@:|
-            }
-           
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @if (item.Author == null)
+                {
+                    <i>No Author</i>
+                }
+                @Html.DisplayFor(modelItem => item.Author.FullName)
+                (@Html.DisplayFor(modelItem => item.Author.UserName))
+            </td>
+            <td>
+                @if (User.IsInRole("Administrators"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new {id = item.PostId})@:|
+                }
 
-            @Html.ActionLink("Details", "Details", new {id = item.Id})|
-            
-            @if (User.IsInRole("Administrators"))
-            {
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            }
-            
-        </td>
-    </tr>
-}
 
+                @Html.ActionLink("Details", "Details", new {id = item.PostId})|
+
+                @if (User.IsInRole("Administrators"))
+                {
+                    @Html.ActionLink("Delete", "Delete", new {id = item.PostId})
+                }
+
+            </td>
+        </tr>
+    }
 </table>
+<div>
+    @Html.ActionLink("[Give us Feedback]", "Create", "Comments")
+</div>
