@@ -28,5 +28,8 @@ namespace Course_Project_Blog.Models
         public string AuthorId { get; set; }
 
         public string Result { get; set; }
+
+        public virtual ICollection<Tag> Tags { get; set; }
+
     }
 }

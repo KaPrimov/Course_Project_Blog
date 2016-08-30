@@ -11,7 +11,7 @@ namespace Course_Project_Blog.Controllers
 {
     public class HomeController : Controller
     {
-        Repository _repository = new Repository();
+        
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {

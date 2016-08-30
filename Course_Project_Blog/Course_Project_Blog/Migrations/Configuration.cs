@@ -93,22 +93,38 @@ namespace Course_Project_Blog.Migrations
                     date: new DateTime(2016, 08, 27), 
                     time: new DateTime(2016, 08, 27, 14, 30 , 00), 
                     result: "0 - 1",
-                    authotUsername: "admin@gmail.com"
+                    authorUsername: "admin@gmail.com"
                     );
                 CreateGames(context,
                    teams: "Man. Utd - Southampton",
                    date: new DateTime(2016, 08, 19),
                    time: new DateTime(2016, 08, 19, 17, 30, 00),
                    result: "2 - 0",
-                   authotUsername: "admin@gmail.com"
+                   authorUsername: "admin@gmail.com"
                    );
                 CreateGames(context,
                    teams: "Man. Utd - Man. City",
                    date: new DateTime(2016, 10, 09),
                    time: new DateTime(2016, 10, 09, 14, 30, 00),
                    result: "Will be played",
-                   authotUsername: "admin@gmail.com"
+                   authorUsername: "admin@gmail.com"
                    );
+                CreateTag(context,
+                    title: "Game",
+                    authorUsername: "admin@gmail.com"
+                    );
+                CreateTag(context,
+                    title: "Transfer",
+                    authorUsername: "admin@gmail.com"
+                    );
+                CreateTag(context,
+                    title: "Man. City",
+                    authorUsername: "admin@gmail.com"
+                    );
+                CreateTag(context,
+                    title: "Hull",
+                    authorUsername: "admin@gmail.com"
+                    );
 
                 context.SaveChanges();
             }
@@ -176,15 +192,23 @@ namespace Course_Project_Blog.Migrations
             context.Posts.Add(post);
         }
 
-        private void CreateGames(ApplicationDbContext context, string teams, DateTime date, DateTime time, string result, string authotUsername)
+        private void CreateGames(ApplicationDbContext context, string teams, DateTime date, DateTime time, string result, string authorUsername)
         {
             var game = new Game();
             game.Teams = teams;
             game.Date = date;
             game.Time = time;
             game.Result = result;
-            game.Author = context.Users.Where(u => u.UserName == authotUsername).FirstOrDefault();
+            game.Author = context.Users.Where(u => u.UserName == authorUsername).FirstOrDefault();
             context.Games.Add(game);
+        }
+
+        private void CreateTag(ApplicationDbContext context, string title, string authorUsername)
+        {
+            var tag = new Tag();
+            tag.Title = title;
+            tag.Author = context.Users.Where(u => u.UserName == authorUsername).FirstOrDefault();
+            context.Tags.Add(tag);
         }
     }
 }
