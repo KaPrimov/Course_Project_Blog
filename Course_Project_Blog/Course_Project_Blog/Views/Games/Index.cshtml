@@ -5,37 +5,41 @@
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Administrators") || User.IsInRole("Moderators"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table class="table">
     <tr>
-        <th>
-            <b>Author Name</b>
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.Teams)
         </th>
         <th>
-            <b>Start Time</b>
+            <b>Date</b>
+        </th>
+        <th>
+            <b>Time</b>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Result)
         </th>
-        <th></th>
+        <th>Actions</th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.FullName)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.Teams)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StarTime)
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Result)

@@ -76,7 +76,7 @@ namespace Course_Project_Blog.Controllers
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Create");
+                    return RedirectToAction("Index", "Posts");
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
@@ -109,6 +109,44 @@ namespace Course_Project_Blog.Controllers
                 return HttpNotFound();
             }
             return View(comment);
+        }
+
+        [Authorize(Roles = "Administrators")]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                this.AddNotification("Post can not be found", NotificationType.ERROR);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comment);
+        }
+
+        // POST: Posts/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrators")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+            this.AddNotification("Comment deleated.", NotificationType.INFO);
+            return RedirectToAction("Index", "Posts");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
     }

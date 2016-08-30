@@ -90,22 +90,25 @@ namespace Course_Project_Blog.Migrations
                     );
                 CreateGames(context,
                     teams: "Hull - Man. Utd",
-                    startTime: DateTime.Now.Date.AddDays(5).AddHours(21).AddMinutes(30),
-                    result: "Still not plaied",
-                    authotUsername: "merry@gmail.com"
-                    );
-                CreateGames(context,
-                    teams: "Hull - Man. Utd",
-                    startTime: DateTime.Now.Date.AddDays(7).AddHours(21).AddMinutes(30),
-                    result: "Still not plaied",
-                    authotUsername: "merry@gmail.com"
-                    );
-                CreateGames(context,
-                    teams: "Bournemouth - Man. Utd",
-                    startTime: DateTime.Now.Date.AddDays(-3).AddHours(1).AddMinutes(30),
-                    result: "0 - 2",
+                    date: new DateTime(2016, 08, 27), 
+                    time: new DateTime(2016, 08, 27, 14, 30 , 00), 
+                    result: "0 - 1",
                     authotUsername: "admin@gmail.com"
                     );
+                CreateGames(context,
+                   teams: "Man. Utd - Southampton",
+                   date: new DateTime(2016, 08, 19),
+                   time: new DateTime(2016, 08, 19, 17, 30, 00),
+                   result: "2 - 0",
+                   authotUsername: "admin@gmail.com"
+                   );
+                CreateGames(context,
+                   teams: "Man. Utd - Man. City",
+                   date: new DateTime(2016, 10, 09),
+                   time: new DateTime(2016, 10, 09, 14, 30, 00),
+                   result: "Will be played",
+                   authotUsername: "admin@gmail.com"
+                   );
 
                 context.SaveChanges();
             }
@@ -173,11 +176,12 @@ namespace Course_Project_Blog.Migrations
             context.Posts.Add(post);
         }
 
-        private void CreateGames(ApplicationDbContext context, string teams, DateTime startTime, string result, string authotUsername)
+        private void CreateGames(ApplicationDbContext context, string teams, DateTime date, DateTime time, string result, string authotUsername)
         {
             var game = new Game();
             game.Teams = teams;
-            game.StarTime = startTime;
+            game.Date = date;
+            game.Time = time;
             game.Result = result;
             game.Author = context.Users.Where(u => u.UserName == authotUsername).FirstOrDefault();
             context.Games.Add(game);

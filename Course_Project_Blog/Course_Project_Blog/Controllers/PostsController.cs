@@ -1,4 +1,6 @@
 ﻿
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -25,12 +27,13 @@ namespace Course_Project_Blog.Controllers
             if (id == null)
             {
                 this.AddNotification("The Post can not be found", NotificationType.ERROR);
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Post post = db.Posts.Find(id);
             if (post == null)
             {
-                return HttpNotFound();
+                this.AddNotification("The Post can not be found", NotificationType.ERROR);
+                return RedirectToAction("Index");
             }
             return View(post);
         }
@@ -71,12 +74,14 @@ namespace Course_Project_Blog.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                this.AddNotification("The Post can not be found", NotificationType.ERROR);
+                return RedirectToAction("Index");
             }
             Post post = db.Posts.Find(id);
             if (post == null)
-            {
-                return HttpNotFound();
+            {   
+                this.AddNotification("The Post can not be found", NotificationType.ERROR);
+                return RedirectToAction("Index");
             }
             return View(post);
         }
@@ -126,7 +131,6 @@ namespace Course_Project_Blog.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrators")]
-       
         public ActionResult DeleteConfirmed(int id)
         {
             Post post = db.Posts.Find(id);
@@ -144,5 +148,6 @@ namespace Course_Project_Blog.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

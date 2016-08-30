@@ -19,7 +19,7 @@ namespace Course_Project_Blog.Controllers
         public ActionResult Index()
         {
             var games = db.Games.Include(g => g.Author);
-            return View(games.OrderBy(g => g.StarTime).ToList());
+            return View(games.OrderBy(g => g.Date).ToList());
         }
 
         // GET: Games/Details/5
@@ -49,7 +49,8 @@ namespace Course_Project_Blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Teams,StarTime,AuthorId,Result")] Game game)
+        [Authorize]
+        public ActionResult Create([Bind(Include = "Id,Teams,Date,Time,AuthorId,Result")] Game game)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +89,7 @@ namespace Course_Project_Blog.Controllers
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         [Authorize(Roles = "Administrators")]
-        public ActionResult Edit([Bind(Include = "Id,Teams,StarTime,AuthorId,Result")] Game game)
+        public ActionResult Edit([Bind(Include = "Id,Teams,Date,Time,AuthorId,Result")] Game game)
         {
             if (ModelState.IsValid)
             {

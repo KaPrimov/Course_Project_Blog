@@ -24,10 +24,18 @@
         </div>
 
         <div class="form-group">
-            <span class = "control-label col-md-2"><b>Start Time</b></span> 
+            <span class = "control-label col-md-2"><b>Date</b></span> 
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StarTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StarTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Date, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Date, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2"><b>Time</b></span>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -52,6 +60,3 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

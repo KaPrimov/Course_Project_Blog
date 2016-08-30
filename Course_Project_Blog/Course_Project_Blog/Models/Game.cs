@@ -15,9 +15,13 @@ namespace Course_Project_Blog.Models
         [MaxLength(200)]
         public string Teams { get; set; }
 
-        [Required]
-        [DataType(DataType.DateTime)]
-        public DateTime StarTime { get; set; }
+        
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
+
+        
+        [DataType(DataType.Time)]
+        public DateTime Time { get; set; }
 
         public ApplicationUser Author { get; set; }
 
