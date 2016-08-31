@@ -42,10 +42,11 @@
     </div>
     @if (Model.Comments.Any())
     {
-        @:Comments:
+        @:<b>Comments:</b><br/>
         <ul>
             @foreach (var comment in Model.Comments)
             {
+                <br />
                 <li>
                     @comment.Text
                     @if (@comment.AuthorId != null)
@@ -55,8 +56,9 @@
                     @if (User.IsInRole("Administrators"))
                     {
                         @Html.ActionLink("Edit", "", "Comments" + "/" + "Edit/" + comment.Id)@:|
-                        @Html.ActionLink("Delete", "", "Comments" + "/" + "Delete/" + comment.Id);
+                        @Html.ActionLink("Delete", "", "Comments" + "/" + "Delete/" + comment.Id)@:|
                     }
+                    @Html.ActionLink("Details", "", "Comments" + "/" + "Details/" + comment.Id)
                 </li>
             }
         </ul>

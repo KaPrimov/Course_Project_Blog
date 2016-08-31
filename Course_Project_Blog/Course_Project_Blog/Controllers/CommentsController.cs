@@ -39,12 +39,14 @@ namespace Course_Project_Blog.Controllers
                     db.Comments.Add(comment);
                     db.SaveChanges();
                     this.AddNotification("Comment created", NotificationType.INFO);
-                    return RedirectToAction("Create");
+                    return RedirectToAction("Index", "Posts");
                 }
             PopulatePostsDropDownList(comment.PostId);
             return View(comment);
 
             }
+
+        // GET: Comments/Edit
         public ActionResult Edit(int? id)
         {
             if (id == null)

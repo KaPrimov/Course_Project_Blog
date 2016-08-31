@@ -27,24 +27,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AuthorId)
+            Author
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AuthorId)
+            @Html.DisplayFor(model => model.Author.FullName)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostId)
-        </dd>
+        
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @if (User.IsInRole("Administrators"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })@:|
+    }
+    
     @Html.ActionLink("Back to List", "Index", "Posts")
 </p>
