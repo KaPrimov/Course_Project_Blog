@@ -15,7 +15,7 @@ namespace Course_Project_Blog.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.Author).OrderByDescending(p => p.Date).Take(3);
+            var posts = db.Posts.Include(p => p.Author).OrderByDescending(p => p.Date).Take(5);
             var sidePosts = db.Posts.Include(p => p.Author).OrderByDescending(p => p.Date).Take(5);
 
             this.ViewBag.sidePosts = sidePosts;

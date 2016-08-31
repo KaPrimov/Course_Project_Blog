@@ -18,5 +18,7 @@ namespace Course_Project_Blog.Controllers
             var isAdmin = (currenUserID != null && User.IsInRole("Administrators"));
             return isAdmin;
         }
+
+      
     }
 }

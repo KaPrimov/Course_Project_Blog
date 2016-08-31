@@ -100,13 +100,14 @@ namespace Course_Project_Blog.Controllers
         {
             if (id == null)
             {
-                this.AddNotification("The Post can not be found", NotificationType.ERROR);
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                this.AddNotification("The Comment can not be found", NotificationType.ERROR);
+                return RedirectToAction("Index", "Posts");
             }
             Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
-                return HttpNotFound();
+                this.AddNotification("The Comment can not be found", NotificationType.ERROR);
+                return RedirectToAction("Index", "Posts");
             }
             return View(comment);
         }
@@ -116,13 +117,14 @@ namespace Course_Project_Blog.Controllers
         {
             if (id == null)
             {
-                this.AddNotification("Post can not be found", NotificationType.ERROR);
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                this.AddNotification("The Comment can not be found", NotificationType.ERROR);
+                return RedirectToAction("Index", "Posts");
             }
             Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
-                return HttpNotFound();
+                this.AddNotification("The Comment can not be found", NotificationType.ERROR);
+                return RedirectToAction("Index", "Posts");
             }
             return View(comment);
         }

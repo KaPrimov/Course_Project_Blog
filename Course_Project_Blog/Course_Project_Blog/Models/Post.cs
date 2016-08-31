@@ -15,6 +15,7 @@ namespace Course_Project_Blog.Models
         {
             Date = DateTime.Now;
             Comments = new HashSet<Comment>();
+            Tags = new HashSet<Tag>();
         }
         
         [Key]
