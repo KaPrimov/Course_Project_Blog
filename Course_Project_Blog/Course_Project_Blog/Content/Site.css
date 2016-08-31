@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    text-decoration-color: white;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -67,13 +68,13 @@ footer, header, hgroup, menu, nav, section {
 body {
     line-height: 1;
 }
-.navbar {
-    
-}
 
-.home-page-category-grid {
+.wrapper {
     text-align: left;
-    background: url('Images/background.png');
-    background-repeat: no-repeat;
+    background: url('Images/background.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-}
+    background-position-y: -150px;
+    }

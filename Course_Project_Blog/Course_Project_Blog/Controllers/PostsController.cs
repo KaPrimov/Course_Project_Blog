@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Course_Project_Blog.Extensions;
 using Course_Project_Blog.Models;
 
+
 namespace Course_Project_Blog.Controllers
 {
     public class PostsController : Controller
@@ -94,7 +95,7 @@ namespace Course_Project_Blog.Controllers
         [ValidateInput(false)]
         [Authorize(Roles = "Administrators")]
         
-        public ActionResult Edit([Bind(Include = "PostId,Title,Body,Date,Author_Id")] Post post)
+        public ActionResult Edit([Bind(Include = "PostId,Title,Body,Date,Author_Id,Tags")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -148,6 +149,8 @@ namespace Course_Project_Blog.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
 
     }
 }

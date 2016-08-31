@@ -4,25 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Fans United Blog</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
 
     @Styles.Render("~/Content/css")
-    @RenderSection("styles", required: false)
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-    <style type="text/css">
-    body {
-        background-image: url('./Images/background.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    </style>
+    
 </head>
 <body>
-    <div class="home-page-category-grid">
+    <div class="wrapper">
         
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -53,6 +47,7 @@
         </div>
     </div>
 @Scripts.Render("~/bundles/bootstrap")
+@RenderSection("styles", required: false)
 @RenderSection("scripts", required: false)
 </body>
 </html>

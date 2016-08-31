@@ -1,73 +1,73 @@
-﻿
-@model IEnumerable<Course_Project_Blog.Models.Post>
-@using Course_Project_Blog.Extensions
-@Html.Partial("_Notifications")
+﻿<div class="wrapper">
+    @model IEnumerable<Course_Project_Blog.Models.Post>
+    @using Course_Project_Blog.Extensions
+    @Html.Partial("_Notifications")
 
-@{
-    ViewBag.Title = "Index";
-}
-
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create") ///
-    @Html.ActionLink("[Give us Feedback]", "Create", "Comments")
-</p>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author.FullName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @if (item.Author == null)
-                {
-                    <i>No Author</i>
-                }
-                @Html.DisplayFor(modelItem => item.Author.FullName)
-                (@Html.DisplayFor(modelItem => item.Author.UserName))
-            </td>
-            <td>
-                @if (User.IsInRole("Administrators"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new {id = item.PostId})@:|
-                }
-
-
-                @Html.ActionLink("Details", "Details", new {id = item.PostId})|
-
-                @if (User.IsInRole("Administrators"))
-                {
-                    @Html.ActionLink("Delete", "Delete", new {id = item.PostId})
-                }
-
-            </td>
-        </tr>
+    @{
+        ViewBag.Title = "Index";
     }
-</table>
 
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create") ///
+        @Html.ActionLink("[Give us Feedback]", "Create", "Comments")
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author.FullName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @if (item.Author == null)
+                {
+                        <i>No Author</i>
+                    }
+                    @Html.DisplayFor(modelItem => item.Author.FullName)
+                    (@Html.DisplayFor(modelItem => item.Author.UserName))
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrators"))
+                {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PostId })@:|
+                }
+
+
+                    @Html.ActionLink("Details", "Details", new { id = item.PostId })|
+
+                    @if (User.IsInRole("Administrators"))
+                {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
+                    }
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>

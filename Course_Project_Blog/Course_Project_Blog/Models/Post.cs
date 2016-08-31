@@ -15,7 +15,7 @@ namespace Course_Project_Blog.Models
         {
             Date = DateTime.Now;
             Comments = new HashSet<Comment>();
-            Tags = new HashSet<Tag>();
+            
         }
         
         [Key]
@@ -38,7 +38,6 @@ namespace Course_Project_Blog.Models
         public ApplicationUser Author { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
-
-        public virtual ICollection<Tag> Tags { get; set; }
+        
     }
 }

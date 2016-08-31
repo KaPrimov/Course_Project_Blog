@@ -1,71 +1,73 @@
-﻿@using Course_Project_Blog.Models
-@model Course_Project_Blog.Models.Post
+﻿<div class="wrapper">
+    @using Course_Project_Blog.Models
+    @model Course_Project_Blog.Models.Post
 
-  
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
-
-<div>
-    <h4>Post</h4>
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-    </dl>
-</div>
-@if (Model.Comments.Any())
-{
-    @:Comments:
-    <ul>
-        @foreach (var comment in Model.Comments)
-        {
-            <li>
-                @comment.Text
-                @if (@comment.AuthorId != null)
-                {
-                    @: (by @comment.Author.FullName)
-                }
-                @if (User.IsInRole("Administrators"))
-                {
-                    @Html.ActionLink("Edit", "", "Comments" + "/" + "Edit/" + comment.Id)@:|
-                    @Html.ActionLink("Delete", "", "Comments" + "/" + "Delete/" + comment.Id);
+    @{
+        ViewBag.Title = "Details";
     }
-            </li>
-        }
-    </ul>
-    
-}
 
-<p>
-    @if (User.IsInRole("Administrators"))
+    <h2>Details</h2>
+
+    <div>
+        <h4>Post</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Body)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Body)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+        </dl>
+    </div>
+    @if (Model.Comments.Any())
     {
-    @Html.ActionLink("Edit the Post", "Edit", new {id = Model.PostId})@:|
+        @:Comments:
+        <ul>
+            @foreach (var comment in Model.Comments)
+            {
+                <li>
+                    @comment.Text
+                    @if (@comment.AuthorId != null)
+                    {
+                        @: (by @comment.Author.FullName)
+                }
+                    @if (User.IsInRole("Administrators"))
+                    {
+                        @Html.ActionLink("Edit", "", "Comments" + "/" + "Edit/" + comment.Id)@:|
+                        @Html.ActionLink("Delete", "", "Comments" + "/" + "Delete/" + comment.Id);
+                    }
+                </li>
+            }
+        </ul>
+
     }
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    <p>
+        @if (User.IsInRole("Administrators"))
+        {
+            @Html.ActionLink("Edit the Post", "Edit", new { id = Model.PostId })@:|
+    }
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

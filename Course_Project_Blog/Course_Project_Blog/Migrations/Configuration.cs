@@ -109,22 +109,6 @@ namespace Course_Project_Blog.Migrations
                    result: "Will be played",
                    authorUsername: "admin@gmail.com"
                    );
-                CreateTag(context,
-                    title: "Game",
-                    authorUsername: "admin@gmail.com"
-                    );
-                CreateTag(context,
-                    title: "Transfer",
-                    authorUsername: "admin@gmail.com"
-                    );
-                CreateTag(context,
-                    title: "Man. City",
-                    authorUsername: "admin@gmail.com"
-                    );
-                CreateTag(context,
-                    title: "Hull",
-                    authorUsername: "admin@gmail.com"
-                    );
 
                 context.SaveChanges();
             }
@@ -203,12 +187,6 @@ namespace Course_Project_Blog.Migrations
             context.Games.Add(game);
         }
 
-        private void CreateTag(ApplicationDbContext context, string title, string authorUsername)
-        {
-            var tag = new Tag();
-            tag.Title = title;
-            tag.Author = context.Users.Where(u => u.UserName == authorUsername).FirstOrDefault();
-            context.Tags.Add(tag);
-        }
+        
     }
 }

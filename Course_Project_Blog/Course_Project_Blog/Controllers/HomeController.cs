@@ -58,7 +58,10 @@ namespace Course_Project_Blog.Controllers
             return this.RedirectToAction("Schedule");
         }
 
-       
-
+        public ActionResult MyAudio()
+        {
+            var file = Server.MapPath("~/app_data/test.mp3");
+            return File(file, "audio/mp3");
+        }
     }
 }
